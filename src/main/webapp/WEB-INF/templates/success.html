@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!-- 使用ServletAPI向request域对象共享数据 -->
+<!-- 2种都能从request 取值  -->
+<h1 th:text="${#request.getAttribute('testScope')}"></h1>
+<h1 th:text="${testScope}"></h1>
+
+<!-- 使用ModelAndView向request域对象共享数据 -->
+<h1 th:text="${testModelAndView}"></h1>
+
+<!--3、使用Model向request域对象共享数据-->
+<h1 th:text="${testModel}"></h1>
+
+<!--4、使用map向request域对象共享数据-->
+<h1 th:text="${testMap}"></h1>
+
+<!--5、使用ModelMap向request域对象共享数据-->
+<h1 th:text="${testModelMap}"></h1>
+
+
+<!--7、向session域共享数据-->
+<h1 th:text="${session.get('testSessionScope')}"></h1>
+
+<!--向application域共享数据-->
+<h1 th:text="${application.get('testApplicationScope')}"></h1>
+</body>
+</html>
