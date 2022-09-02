@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>Hello World thymelaf</h1>
+
+<p><a th:href="@{/testServletAPI}">testServletAPI 使用ServletAPI向request域对象共享数据</a></p>
+<p><a th:href="@{/testModelAndView}">testModelAndView 使用ModelAndView向request域对象共享数据</a></p>
+<p><a th:href="@{/testModel}">testModel 使用Model向request域对象共享数据</a></p>
+<p><a th:href="@{/testMap}">testMap 使用map向request域对象共享数据</a></p>
+<p><a th:href="@{/testModelMap}">testModelMap 使用ModelMap向request域对象共享数据</a></p>
+<p><a th:href="@{/testSession}">testSession 向session域共享数据</a></p>
+
+<div id="root">
+    <p><a th:href="@{/testApplication}">testApplication 向application域共享数据</a></p>
+
+    <form th:action="@{/user}" method="post">
+        <label>
+            用户名：<input type="text" name="username"/>
+        </label>
+        <label>
+            密码：<input type="password" name="password"/>
+        </label>
+        <input type="hidden" name="_method" value="put">
+        <input type="submit" value="修改put">
+    </form>
+
+
+    <!--通过a 标签rest 风格删除-->
+    <!--stop:指的是阻止父组件（节点）的事件冒泡   prevent 阻止事件的默认行为，比如click,blur,change。。。-->
+    <a @click.prevent="submitPut" th:href="@{/user}">通过a 标签rest 风格删除</a>
+
+    <form id="putForm" method="post">
+        <input type="hidden" name="_method" value="put">
+    </form>
+</div>
+<!--这边可以cdn 导入vue  vue3  https://cn.vuejs.org/guide/quick-start.html#without-build-tools
+                        vue2  https://v2.cn.vuejs.org/v2/guide/installation.html
+ 暂时在static里面放静态文件 static 不能放webINFO webinfo必须通过转发访问
+ 还要注意 这边要开启静态资源访问 spring mvc 配置文件中  <mvc:default-servlet-handler />
+ -->
+<script type="text/javascript" th:src="@{/static/js/vue2.7.10.min.js}"></script>
+<script type="text/javascript">
+    // Vue.config.productionTip = false;
+
+    new Vue({
+        el: '#root',
+        methods: {
+            submitPut(event) {
+                let form = document.getElementById('putForm');
+                form.action = event.target.href;
+                console.log( form.action )
+                form.submit();
+            }
+        }
+    })
+
+</script>
+</body>
+</html>
